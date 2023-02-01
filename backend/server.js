@@ -5,8 +5,13 @@ const PORT = process.env.PORT || 8000
 
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 app.get('/', (req, res) => {
-  res.send('Hello!!!')
+  res.status(200).json({ message: 'Now we send jsons' })
 })
+
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.listen(PORT, () => console.log(`The server is running on port: ${PORT}`))
